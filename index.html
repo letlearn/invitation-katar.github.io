@@ -96,7 +96,7 @@
                 var acr_rapat = document.getElementById("acr_rapat").value;
                 var tgl_dibuat = document.getElementById("tgl_dibuat").value;
                 const d = new Date();
-                let invDate = d.getFullYear() + d.getMonth() + d.getDate();
+                let invDate = d.getFullYear() + '_' + d.getMonth() + '_' + d.getDate();
 
                 var pdf = new jsPDF({
                     orientation: 'p',
