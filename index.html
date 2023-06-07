@@ -36,14 +36,24 @@
         </div>
         <form>
             <div class="form-group">
-                <label for="tgl_rapat">Tanggal Rapat</label>
-                <input type="text" class="form-control" id="tgl_rapat" aria-describedby="emailHelp" placeholder="Ex: 20 Mei 2023">
-                <small id="tgl_rapat_help" class="form-text text-muted">Isi Tanggal Rapat, ex: Selasa, 20 Mei 2023.</small>
+                <label for="tgl_rapat">Hari / Tanggal</label>
+                <input type="text" class="form-control" id="tgl_rapat" aria-describedby="emailHelp" placeholder="Ex: Selasa, 06 Juni 2023">
+                <small id="tgl_rapat_help" class="form-text text-muted">Isi Tanggal Rapat, ex: Selasa, 06 Juni 2023.</small>
             </div>
             <div class="form-group">
-                <label for="tpt_rapat">Tempat Rapat</label>
+                <label for="pkl_rapat">Pukul</label>
+                <input type="text" class="form-control" id="pkl_rapat" placeholder="Ex: 19.30 WIB s.d. selesai">
+                <small id="pkl_rapat_help" class="form-text text-muted">Isi Pukul Rapat, ex: 19.30 WIB s.d. selesai</small>
+            </div>
+            <div class="form-group">
+                <label for="tpt_rapat">Tempat</label>
                 <input type="text" class="form-control" id="tpt_rapat" placeholder="Ex: Aula Kelurahan Tlogoadi">
                 <small id="tpt_rapat_help" class="form-text text-muted">Isi Tempat Rapat, ex: Aula Kelurahan Tlogoadi</small>
+            </div>
+            <div class="form-group">
+                <label for="acr_rapat">Tempat</label>
+                <input type="text" class="form-control" id="acr_rapat" placeholder="Ex: Rapat Karang Taruna Tlaga Bakti">
+                <small id="acr_rapat_help" class="form-text text-muted">Isi Acara Rapat, ex: Rapat Karang Taruna Tlaga Bakti</small>
             </div>
             <div class="form-group">
                 <label for="tgl_dibuat">Tanggal Dibuat</label>
@@ -80,7 +90,9 @@
         <script>
             function generatePDF() {
                 var tgl_rapat = document.getElementById("tgl_rapat").value;
+                var pkl_rapat = document.getElementById("pkl_rapat").value;
                 var tpt_rapat = document.getElementById("tpt_rapat").value;
+                var acr_rapat = document.getElementById("acr_rapat").value;
                 var tgl_dibuat = document.getElementById("tgl_dibuat").value;
 
                 var pdf = new jsPDF({
@@ -100,13 +112,15 @@
 
                 // Header
                 // pdf.text("Teks", Kiri, Atas);
+                pdf.setFont("times", "bold")
                 pdf.setFontSize(14);
-                pdf.setFontStyle("bold");
-                pdf.text("KARANG TARUNA", 70, 10);
-                pdf.text("TLAGA BAKTI TLOGOADI", 60, 14);
+                // pdf.setFontStyle("bold");
+                pdf.text("KARANG TARUNA", 65, 10);
+                pdf.text("TLAGA BAKTI TLOGOADI", 55, 14);
 
+                pdf.setFont("times", "normal")
                 pdf.setFontSize(11);
-                pdf.setFontStyle("normal");
+                // pdf.setFontStyle("normal");
                 pdf.text("Sekretariat", 38, 19);
                 pdf.text(":", 60, 19);
                 pdf.text("Kompleks Balai Desa Tlogoadi, Cebongan Lor,", 63, 19);
@@ -118,20 +132,24 @@
 
                 pdf.text("HP", 38, 31);
                 pdf.text(":", 60, 31);
-                pdf.text("0856 2550 240", 63, 31);
+                pdf.text("0822 2186 3648/ 0856 2550 240", 63, 31);
 
                 pdf.setFontStyle("bold");
-                pdf.text("_________________________________________________________________", 5, 38);
-                pdf.text("_________________________________________________________________", 5, 39);
+                pdf.text("_____________________________________________________________________", 5, 38);
+                pdf.text("_____________________________________________________________________", 5, 39);
 
+                pdf.setFont("times", "normal")
                 pdf.setFontSize(12);
-                pdf.setFontStyle("normal");
+                // pdf.setFontStyle("normal");
                 pdf.text("Hal", 5, 44);
                 pdf.text(":", 12, 44);
-                pdf.setFontStyle("bold");
+
+                pdf.setFont("times", "bold")
+                // pdf.setFontStyle("bold");
                 pdf.text("Undangan", 16, 44);
 
-                pdf.setFontStyle("normal");
+                pdf.setFont("times", "normal")
+                // pdf.setFontStyle("normal");
                 pdf.text("Kepada", 90, 48);
                 pdf.text("Yth.", 90, 52);
                 pdf.setFontStyle("bold");
@@ -149,7 +167,7 @@
 
                 pdf.text("Pukul", 25, 89);
                 pdf.text(":", 55, 89);
-                pdf.text("19.30 WIB s.d. selesai", 59, 89);
+                pdf.text(pkl_rapat, 59, 89);
 
                 pdf.text("Tempat", 25, 94);
                 pdf.text(":", 55, 94);
@@ -157,7 +175,7 @@
 
                 pdf.text("Acara", 25, 99);
                 pdf.text(":", 55, 99);
-                pdf.text("Rapat Karang Taruna Tlaga Bakti", 59, 99);
+                pdf.text(acr_rapat, 59, 99);
 
                 pdf.text("Demikian undangan ini kami sampaikan, atas perhatian dan kehadirannya", 5, 109);
                 pdf.text("kami ucapkan terima kasih", 5, 114);
