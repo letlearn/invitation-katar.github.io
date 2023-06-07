@@ -95,6 +95,8 @@
                 var tpt_rapat = document.getElementById("tpt_rapat").value;
                 var acr_rapat = document.getElementById("acr_rapat").value;
                 var tgl_dibuat = document.getElementById("tgl_dibuat").value;
+                const d = new Date();
+                let invDate = d.getFullYear() + d.getMonth() + d.getDate();
 
                 var pdf = new jsPDF({
                     orientation: 'p',
@@ -192,7 +194,7 @@
                 pdf.text("Nurgiyanto", 90, 171);
 
                 // Generate the pdf
-                pdf.save('Undangan_Katar.pdf');
+                pdf.save('Undangan_Katar_'+invDate+'.pdf');
 
             }
         </script>
